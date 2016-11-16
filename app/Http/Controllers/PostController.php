@@ -19,12 +19,33 @@ class PostController extends Controller
     }
 
     public function store(Request $request) {
+      $this->validate($request, [
+        'title' => 'required',
+        'body' => 'required'
+      ]);
       Post::create($request->all());
       return redirect()->action('PostController@index');
     }
 
     public function destory(Request $request) {
       Post::destroy($request->id);
+      return redirect()->action('PostController@index');
+    }
+
+    public function edit(Request $request) {
+      $post = Post::findOrFail($request->id);
+      return view('posts.edit', ['post' => $post]);
+    }
+
+    public function update(Request $request) {
+
+      $this->validate($request,[
+          'title'=> 'required',
+          'body' => 'required',
+      ]);
+
+      $post = Post::findOrFail($request->id);
+      $post->fill($request->all())->save();
       return redirect()->action('PostController@index');
     }
 }

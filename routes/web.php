@@ -20,3 +20,7 @@ Route::get('/home','PostController@index');
 Route::get('/new', 'PostController@create');
 
 Route::post('/store', 'PostController@store');
+
+Route::get('/edit/{id}', 'PostController@edit');
+
+Route::post('/update/{id}', 'PostController@update');
