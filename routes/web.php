@@ -11,6 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','PostController@index');
+
+Route::get('/delete/{id}', 'PostController@destory');
+
+Route::get('/home','PostController@index');
+
+Route::get('/new', 'PostController@create');
+
+Route::post('/store', 'PostController@store');
